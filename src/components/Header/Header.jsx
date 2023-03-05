@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import "./Header.css";
-import { Container, Row } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import logo from "../../assets/images/eco-logo.png";
 import userIcon from "../../assets/images/user-icon.png";
 import { motion } from "framer-motion";
@@ -22,10 +22,31 @@ const nav__links = [
 ];
 
 const Header = () => {
+
+  const headerRef = useRef(null)
+
+  const stickyHeadFunct = () => {
+    window.addEventListener('scroll', () => {
+      if(document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        headerRef.current.classList.add('sticky__header')
+      } else {
+        headerRef.current.classList.remove('sticky__header')
+      }
+    })
+  }
+
+
+  useEffect(() => {
+    stickyHeadFunct()
+    return () => window.removeEventListener('scroll', stickyHeadFunct)
+  })
+
+
   return (
-    <header className="header">
+    <header className="header" ref={ headerRef }>
       <Container>
-        <Row>
+       <Col lg='12' md='6'>
+       <Row>
           <div className="nav__wrapper">
             <NavLink to="/">
               <div className="logo">
@@ -72,6 +93,7 @@ const Header = () => {
             </div>
           </div>
         </Row>
+       </Col>
       </Container>
     </header>
   );
