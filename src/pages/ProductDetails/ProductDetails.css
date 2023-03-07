@@ -21,6 +21,17 @@
     color: #fff;
 }
 
+.tab__wrapper h6 {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.active__tab {
+    font-weight: 600;
+}
+
 .wrapper {
     margin-top: 50px;
 }

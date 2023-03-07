@@ -58,7 +58,7 @@ const Header = () => {
                 <div className="logo">
                   <img src={logo} alt="logo" />
                   <div>
-                    <h1>Zubismart</h1>
+                    <motion.h1 whileTap={{ scale: 1.1 }}>Zubismart</motion.h1>
                     <p>Since 2021</p>
                   </div>
                 </div>

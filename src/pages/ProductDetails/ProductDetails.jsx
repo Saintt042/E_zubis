@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProductDetails.css";
 import { Container, Row, Col } from "reactstrap";
 import { useParams } from "react-router-dom";
@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 
 
 const ProductDetails = () => {
+  const [tab, setTab] = useState('desc')
   const { id } = useParams();
   const product = products.find((item) => item.id === id);
 
@@ -72,9 +73,18 @@ const ProductDetails = () => {
           <Row>
             <Col lg='12'>
               <div className="tab__wrapper d-flex align-items-center gap-5">
-                <h6>Description: <p>{ description } </p></h6>
-                <h6>Reviews ({ reviews.length })</h6>
+                <motion.h6 whileTap={{ scale: 1.2 }} className={`${tab === 'desc' ? 'active__tab' : '' }`} onClick={() => setTab('desc')} >Description </motion.h6>
+                <motion.h6 whileTap={{ scale: 1.2 }} className={`${tab === 'rev' ? 'active__tab' : '' }`} onClick={() => setTab('rev')}>Reviews ({ reviews.length })</motion.h6>
               </div>
+
+              {
+                tab === 'desc' ? <div className="tab__content mt-5">
+                <p> { description } </p>
+              </div> : <div>Reviews</div>
+
+              }
+
+              
             </Col>
           </Row>
         </Container>
