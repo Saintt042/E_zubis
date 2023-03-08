@@ -27,9 +27,9 @@ const Cart = () => {
               ) : (
                 <table className="table bordered">
                   <thead>
-                    <tr>
+                    <tr className="theaders">
                       <th>Image</th>
-                      <th>Title</th>
+                      <th>Name</th>
                       <th>Price</th>
                       <th>Quantity</th>
                       <th>Delete</th>
@@ -95,14 +95,14 @@ const Tr = ({ item }) => {
   return ( 
   <tr>
   <td>
-    <img src={item.imgUrl} alt={item.productName} />
+    <img src={item.imgUrl} alt="pic" />
   </td>
 
-  <td>{item.productName}</td>
+  <td className="cartfix">{item.productName}</td>
 
-  <td>₦{item.price}</td>
+  <td className="cartfix">₦{item.price}</td>
 
-  <td>{item.quantity}pcs</td>
+  <td className="cartfix">{item.quantity}pcs</td>
 
   <motion.td whileTap={{ scale: 1.2 }}>
     <i class="ri-delete-bin-5-line" onClick={deleteProduct}></i>

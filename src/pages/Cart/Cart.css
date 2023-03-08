@@ -12,3 +12,27 @@ td,
 th {
     color: var(--primary-color);
 }
+
+
+
+@media only screen and (max-width: 992px) {
+    .table tr td img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    .theaders {
+        font-size: 10px;
+        
+    }
+    .cartfix {
+        font-size: 0.6rem;
+    }
+   
+}
+
+@media only screen and (max-width: 768px) {  
+}
+
+
+@media only screen and (max-width: 576px) {
+}
