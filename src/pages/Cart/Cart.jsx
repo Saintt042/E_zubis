@@ -7,10 +7,13 @@ import { motion } from "framer-motion";
 import { cartActions } from "../../redux/slice/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector(state=> state.cart.totalAmount);
+
+  
 
   return (
     <Helmet title="Cart">
@@ -65,7 +68,9 @@ const Cart = () => {
       </section>
     </Helmet>
   );
+  
 };
+
 
 const Tr = ({ item }) => {
 
@@ -73,6 +78,17 @@ const Tr = ({ item }) => {
 
   const deleteProduct = () => {
     dispatch(cartActions.deleteItem(item.id))
+
+    toast.success("Product removed from cart", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   }
 
 
