@@ -93,20 +93,24 @@
 
 .nav__icons .profile .profile__actions {
     position: absolute;
-    top: 100%;
+    top: 98%;
     left: 0;
-    width: 100px;
+    width: 140px;
     z-index: 10;
     padding: 15px;
     align-items: center;
     flex-direction: column;
     background: var(--card-bg-01);
     line-height: 30px;
-    display: none;
+    /* display: none; */
     cursor: pointer;
 }
 
-.show__profileActions {
+.nav__icons .profile .profile__actions:hover {
+    display: block;
+}
+
+.showProfileActions {
     display: block;
 }
 

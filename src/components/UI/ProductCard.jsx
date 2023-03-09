@@ -34,6 +34,25 @@ const ProductCard = ({ item }) => {
 
     };
 
+    const minusFromCart = () => {
+        dispatch(cartActions.minusItem({
+            id: item.id,
+            productName: item.productName,
+            price: item.price,
+            imgUrl: item.imgUrl,
+        }));
+        toast.success('Product removed from your cart', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+    }
+
 
 
   return (
@@ -50,6 +69,7 @@ const ProductCard = ({ item }) => {
         </Link>
         <div className="product__card-bottom d-flex align-items-center justify-content-between p-2">
             <span className="price">₦{ item.price }</span>
+            <motion.span whileTap={{ scale: 1.2 }} onClick={ minusFromCart } ><i class="ri-subtract-line"></i></motion.span>
             <motion.span whileTap={{ scale: 1.2 }} onClick={ addToCart } ><i class="ri-add-line"></i></motion.span>
         </div>
     </div>

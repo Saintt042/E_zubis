@@ -83,10 +83,53 @@ const Cart = () => {
 const Tr = ({ item }) => {
   const dispatch = useDispatch();
 
+  const addToCart = () => {
+    dispatch(
+      cartActions.addItem({
+        id: item.id,
+        productName: item.productName,
+        price: item.price,
+        imgUrl: item.imgUrl,
+      })
+    );
+
+    toast.success("🤗Product added to your cart", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  const minusFromCart = () => {
+    dispatch(
+      cartActions.minusItem({
+        id: item.id,
+        productName: item.productName,
+        price: item.price,
+        imgUrl: item.imgUrl,
+      })
+    );
+    toast.success("Product removed from your cart", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
   const deleteProduct = () => {
     dispatch(cartActions.deleteItem(item.id));
 
-    toast.success("Product removed from cart", {
+    toast.success("Product deleted from your cart", {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
@@ -100,17 +143,30 @@ const Tr = ({ item }) => {
 
   return (
     <tr>
-      <td>
+      <td className="cartFi">
         <img src={item.imgUrl} alt="pic" />
       </td>
 
-      <td className="cartfix">{item.productName}</td>
+      <td className="cartFi">{item.productName}</td>
 
-      <td className="cartfix">₦{item.price}</td>
+      <td className="cartFi">₦{item.price}</td>
 
-      <td className="cartfix">{item.quantity}pcs</td>
-
-      <motion.td whileTap={{ scale: 1.2 }}>
+      <td className="quantitySect">
+        <span className="cartFi">{item.quantity}pcs</span> <br />
+        <span className="cartfix">
+          <motion.span whileTap={{ scale: 1.2 }} onClick={minusFromCart}>
+            <i class="ri-subtract-line"></i>
+          </motion.span>{" "}
+          <motion.span
+            className="d-flex end"
+            whileTap={{ scale: 1.2 }}
+            onClick={addToCart}
+          >
+            <i class="ri-add-line"></i>
+          </motion.span>
+        </span>
+      </td>
+      <motion.td className="deleteIcon" whileTap={{ scale: 1.2 }}>
         <i class="ri-delete-bin-5-line" onClick={deleteProduct}></i>
       </motion.td>
     </tr>

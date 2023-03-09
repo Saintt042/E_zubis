@@ -30,14 +30,15 @@ const Header = () => {
   const headerRef = useRef(null);
 
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
- 
+
+  const profileActionRef = useRef(null);
 
   const menuRef = useRef(null);
-  const profileActionRef = useRef(null);
+
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
-  const stickyHeadFunct =()=> {
+  const stickyHeadFunct = () => {
     window.addEventListener("scroll", () => {
       if (
         document.body.scrollTop > 80 ||
@@ -54,6 +55,7 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         toast.success("Logged out");
+        navigate("/home");
       })
       .catch((err) => {
         toast.error(err.message);
@@ -66,14 +68,13 @@ const Header = () => {
   });
 
   const menuToggle = () => menuRef.current.classList.toggle("active__menu");
-  
-  const toggleProfileActions = () => profileActionRef.current.classList.toggle('show__profileActions');
 
   const navigateToCart = () => {
     navigate("/cart");
   };
 
-
+  const toggleProfileActions = () =>
+    profileActionRef.current.classList.toggle("showProfileActions");
 
   return (
     <header className="header" ref={headerRef}>
@@ -123,20 +124,18 @@ const Header = () => {
                   whileTap={{ scale: 1.2 }}
                   src={currentUser ? currentUser.photoURL : userIcon}
                   alt="profPic"
-                  onClick={toggleProfileActions}
                 />
-
                 <div
                   className="profile__actions"
-                  ref={profileActionRef} 
+                  ref={profileActionRef}
                   onClick={toggleProfileActions}
                 >
-                  {currentUser ? ( 
+                  {currentUser ? (
                     <span onClick={logout}>Logout</span>
                   ) : (
-                    <div>
-                      <Link to="/signup">Signup</Link>
+                    <div className="d-flex align-items-center justify-content-center flex-column">
                       <Link to="/login">Login</Link>
+                      <Link to="/signup">Signup</Link>
                     </div>
                   )}
                 </div>
